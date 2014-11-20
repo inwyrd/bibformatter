@@ -103,7 +103,7 @@ def FormatCheckAuthor(author):
   reformattedAuthorList = [FormatCheckIndividualAuthor(author) for author in authorList]
   manualFixRequired = max([result[1] for result in reformattedAuthorList])
   return re.sub("\s+", " ", " and ".join(result[0] for result in
-      reformattedAuthorList)), manualFixRequired
+      reformattedAuthorList)).strip(), manualFixRequired
 
 
 def FormatCheckYear(year):
@@ -237,7 +237,7 @@ def WriteBibEntry(formattedEntry, outputFile):
 
 
 def main():
-  validBibOutput = open("newBib.bib", "w")
+  validBibOutput = open("validBib.bib", "w")
   invalidBibOutput = open("invalidBib.bib", "w")
 
   duplicates = {}

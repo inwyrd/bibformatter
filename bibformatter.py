@@ -167,14 +167,6 @@ def FormatCheckEntry(entry):
       if manualFixRequired:
         entryManualFixRequired = True
 
-  # Special processing for crossref / UCSD specific bibtex
-  if "crossref" in entry:
-    crossrefKey = StripMangledCrossref(entry["crossref"])
-    reformatted, manualFixRequired = FormatCheckConference(crossrefKey)
-    newEntry["booktitle"] = [reformatted, manualFixRequired]
-    if manualFixRequired:
-      entryManualFixRequired = True
-
   # Entries must conform to a canonical reference ID
   if ("title" not in newEntry or "author" not in newEntry or "year" not in newEntry
       or newEntry["title"][1] or newEntry["author"][1] or newEntry["year"][1]):
@@ -199,13 +191,6 @@ def FormatCheckEntry(entry):
   return newEntry, entryManualFixRequired
 
 
-def StripMangledCrossref(text):
-  """Strip out all characters other than a crossref.
-  Required to filter out broken text like u'mobicom14", year = 2014, tags =
-  "wireless'."""
-  return StripNonAZ(re.sub("\"", " ", re.sub(",", " ", text)).split(" ")[0])
-
-
 def StripBibtex(text):
   """Strip surrounding whitespace, {}, "", and trailing commas."""
   return re.sub("\"", "", re.sub("}", "", re.sub("{", "", text.split("=")[-1]))).strip().strip(",")
@@ -218,16 +203,7 @@ def StripNonAZ(text):
 
 def WriteBibEntry(formattedEntry, outputFile):
   """Output bibtex to a file."""
-
-  # TEMPORARY
-  #if formattedEntry["type"][0] != "inproceedings":
-  #  return
-
-  #if "booktitle" in formattedEntry and formattedEntry["booktitle"][1]:
-  #  return
-  # END TEMPORARY
-
-  text = "@%s{%s\n" % (formattedEntry["type"][0], formattedEntry["id"][0])
+  text = "@%s{%s,\n" % (formattedEntry["type"][0], formattedEntry["id"][0])
   for field in formattedEntry:
     value, fixRequired = formattedEntry[field]
     if field != "type" and field != "id":
@@ -237,6 +213,7 @@ def WriteBibEntry(formattedEntry, outputFile):
 
 
 def main():
+  """Read a filename from the command line and output the valid bib entries."""
   validBibOutput = open("validBib.bib", "w")
   invalidBibOutput = open("invalidBib.bib", "w")
 

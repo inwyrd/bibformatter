@@ -7,8 +7,15 @@ Example:
 """
 
 CONFERENCE_KEYWORDS = [
+  [["Symposium on Architectures for Networking", "ANCS"],
+    ("Proceedings of the ACM/IEEE Symposium on Architectures for "
+     "Networking and Communications Systems")],
   [["Privacy Enhancing Technologies", "PET"],
     "Proceedings of the Privacy Enhancing Technologies Symposium"],
+  [["EuroSys", "European Conference in Computer Systems"],
+    "Proceedings of the ACM European Conference in Computer Systems"],
+  [["Mobile Computing and Networking", "Mobicom"],
+    "Proceedings of the ACM Conference on Mobile Computing and Networking"],
   [["World Wide Web", "WWW"], 
     "Proceedings of the International Conference on the World Wide Web"],
   [["Computer Security Applications", "ACSAC"],

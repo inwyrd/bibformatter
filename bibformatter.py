@@ -161,7 +161,7 @@ def FormatCheckEntry(entry):
   for key in entry:
     if key in formatCheckTypes:
       original = entry[key]
-      reformatted, manualFixRequired = formatCheckTypes[key](original)
+      reformatted, manualFixRequired = formatCheckTypes[key](StripNewlines(original))
       newEntry[key] = [reformatted, manualFixRequired]
 
       if manualFixRequired:
@@ -171,10 +171,6 @@ def FormatCheckEntry(entry):
   if ("title" not in newEntry or "author" not in newEntry or "year" not in newEntry
       or newEntry["title"][1] or newEntry["author"][1] or newEntry["year"][1]):
     logging.warn("Could not canonicalize an ID")
-    if entry["id"] == "dingledine2004tor":
-      import pdb
-      pdb.set_trace()
-
     newEntry["id"] = [entry["id"], True]
     entryManualFixRequired = True
   else:
@@ -189,6 +185,11 @@ def FormatCheckEntry(entry):
       entryManualFixRequired = True
 
   return newEntry, entryManualFixRequired
+
+
+def StripNewlines(text):
+  """Remove all new lines in a string."""
+  return re.sub("\n", " ", text)
 
 
 def StripBibtex(text):

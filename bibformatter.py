@@ -60,7 +60,7 @@ def FormatCheckReference(title, author, year):
 
   firstAuthor =  author.split(" and ")[0]
   referenceAuthorKey = (firstAuthor if len(firstAuthor.split(" ")) <= 1 else
-                        author.split(" and ")[0].split(" ")[1].lower())
+                        firstAuthor.split(" ")[-1].lower())
   reference = StripNonAZ(referenceAuthorKey) + year + StripNonAZ(referenceTitleKey)
   return reference.lower()
 

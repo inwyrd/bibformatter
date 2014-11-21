@@ -8,6 +8,7 @@ Features
 --------
 * Canonicalizes reference names to the form doe2014bibformatter
 * Canonicalizes names to Jane Doe and ...
+* Canonicalizes paper titles to all capitals while maintaining acronyms
 * Canonicalizes conference titles to a preconfigured list (see conferences.py)
 * Removes duplicate BibTex entries
 

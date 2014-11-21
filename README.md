@@ -16,8 +16,7 @@ Example
 -------
 
 To format a new file:
-
-$ bibformatter.py libraryBib.bib
+    $ bibformatter.py libraryBib.bib
 
 This will produce invalidBib.bib and validBib.bib. Invalid entries occur when
 canonicalization fails (e.g., names in the original BibTex entry were
@@ -25,7 +24,6 @@ abbreviated).
 
 If you use crossreferences, you must first flatten the file and then process the
 results:
-
-$ bib2bib --expand --expand-xrefs -ob flattened.bib libraryBib.bib
-  bibformatter.py flattened.bib
+    $ bib2bib --expand --expand-xrefs -ob flattened.bib libraryBib.bib
+      bibformatter.py flattened.bib
 
